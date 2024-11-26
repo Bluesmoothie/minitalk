@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:51 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/26 19:06:54 by ygille           ###   ########.fr       */
+/*   Updated: 2024/11/26 19:13:14 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,10 @@
 
 int	main(void)
 {
-	t_sigaction	sig;
+	struct sigaction	act;
 
 	ft_printf("Server PID : %d\n", getpid());
-	sig-> = sig_handler;
+	act.sa_handler = sig_handler;
 	return (0);
 }
 
