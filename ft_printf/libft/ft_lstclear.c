@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstclear.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/26 18:41:43 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/14 12:27:14 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/14 12:34:07 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+void	ft_lstclear(t_list **lst, void (*del)(void*))
 {
-	if (argc != 3)
+	t_list	*tmp;
+
+	while (*lst != NULL)
 	{
-		ft_printf("Usage: %s <SERVER_PID> <MESSAGE>\n", argv[0]);
-		return (1);
+		tmp = (*lst)->next;
+		ft_lstdelone(*lst, del);
+		*lst = tmp;
 	}
-	return (0);
+	return ;
 }

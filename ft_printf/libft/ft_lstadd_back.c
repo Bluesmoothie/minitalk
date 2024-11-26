@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstadd_back.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/26 18:41:43 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/14 12:13:16 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/14 12:21:36 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+void	ft_lstadd_back(t_list **lst, t_list *new)
 {
-	if (argc != 3)
+	t_list	*last;
+
+	if (*lst == NULL)
 	{
-		ft_printf("Usage: %s <SERVER_PID> <MESSAGE>\n", argv[0]);
-		return (1);
+		*lst = new;
+		return ;
 	}
-	return (0);
+	last = ft_lstlast(*lst);
+	last->next = new;
+	return ;
 }

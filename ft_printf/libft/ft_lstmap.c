@@ -1,23 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_lstmap.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/26 18:41:43 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/14 12:46:31 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/14 13:02:15 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+t_list	*ft_lstmap(t_list *lst, void *(*f)(void *), void (*del)(void *))
 {
-	if (argc != 3)
+	t_list	*map;
+	t_list	*next;
+	t_list	*tmp;
+
+	(void) del;
+	map = NULL;
+	if (lst != NULL)
 	{
-		ft_printf("Usage: %s <SERVER_PID> <MESSAGE>\n", argv[0]);
-		return (1);
+		map = ft_lstnew(f (lst->content));
+		lst = lst->next;
+		tmp = map;
 	}
-	return (0);
+	while (lst != NULL)
+	{
+		next = ft_lstnew(f (lst->content));
+		lst = lst->next;
+		ft_lstadd_back(&tmp, next);
+		tmp = next;
+	}
+	return (map);
 }

@@ -1,23 +1,21 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/26 18:41:43 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/12 19:17:23 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/12 19:22:49 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+int	ft_toupper(int c)
 {
-	if (argc != 3)
-	{
-		ft_printf("Usage: %s <SERVER_PID> <MESSAGE>\n", argv[0]);
-		return (1);
-	}
-	return (0);
+	if (c >= 'a' && c <= 'z')
+		return (c - 32);
+	else
+		return (c);
 }

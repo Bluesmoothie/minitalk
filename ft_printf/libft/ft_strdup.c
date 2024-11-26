@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/26 18:41:43 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 14:27:04 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/13 14:36:31 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+char	*ft_strdup(const char *s)
 {
-	if (argc != 3)
-	{
-		ft_printf("Usage: %s <SERVER_PID> <MESSAGE>\n", argv[0]);
-		return (1);
-	}
-	return (0);
+	char	*dup;
+	size_t	size;
+
+	size = ft_strlen(s) + 1;
+	dup = malloc(sizeof(char) * size);
+	if (dup == NULL)
+		return (NULL);
+	ft_strlcpy(dup, s, size);
+	return (dup);
 }

@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/26 18:41:43 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 18:11:47 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/13 18:16:46 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	if (argc != 3)
+	size_t	size;
+	size_t	i;
+	char	*res;
+
+	size = ft_strlen(s);
+	res = malloc (sizeof(char) * size + 1);
+	if (res == NULL)
+		return (res);
+	i = 0;
+	while (i < size)
 	{
-		ft_printf("Usage: %s <SERVER_PID> <MESSAGE>\n", argv[0]);
-		return (1);
+		res[i] = f((unsigned int)i, s[i]);
+		i++;
 	}
-	return (0);
+	res [i] = '\0';
+	return (res);
 }

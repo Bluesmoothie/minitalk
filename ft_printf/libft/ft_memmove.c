@@ -1,23 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_memmove.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/26 18:41:43 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/12 16:36:03 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/13 14:11:37 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+void	*ft_memmove(void *dest, const void *src, size_t n)
 {
-	if (argc != 3)
+	if (dest == NULL && src == NULL)
+		return (dest);
+	if (dest < src)
+		ft_memcpy (dest, src, n);
+	else
 	{
-		ft_printf("Usage: %s <SERVER_PID> <MESSAGE>\n", argv[0]);
-		return (1);
+		while (n--)
+			((char *)dest)[n] = ((const char *)src)[n];
 	}
-	return (0);
+	return (dest);
 }

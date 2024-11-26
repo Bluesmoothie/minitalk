@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/26 18:41:43 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/12 18:29:55 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/12 18:42:55 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include "libft.h"
 
-int	main(int argc, char *argv[])
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
 {
-	if (argc != 3)
+	size_t	count;
+
+	count = 0;
+	if (size == 0)
+		return (ft_strlen(src));
+	while (count < size - 1 && src[count] != '\0')
 	{
-		ft_printf("Usage: %s <SERVER_PID> <MESSAGE>\n", argv[0]);
-		return (1);
+		dst[count] = src[count];
+		count++;
 	}
-	return (0);
+	dst[count] = '\0';
+	return (ft_strlen(src));
 }

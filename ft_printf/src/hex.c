@@ -1,23 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   hex.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/26 18:41:43 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/15 14:11:31 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/15 17:01:57 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <client.h>
+#include "../include/ft_printf.h"
 
-int	main(int argc, char *argv[])
+void	hex(unsigned long long val, char format, int *i)
 {
-	if (argc != 3)
-	{
-		ft_printf("Usage: %s <SERVER_PID> <MESSAGE>\n", argv[0]);
-		return (1);
-	}
-	return (0);
+	if (val / 16)
+		hex(val / 16, format, i);
+	if (format == UP)
+		ft_putchar_fd(UP_BASE_HEX[val % 16], 1);
+	else
+		ft_putchar_fd(LOW_BASE_HEX[val % 16], 1);
+	(*i) += 1;
+	return ;
 }
