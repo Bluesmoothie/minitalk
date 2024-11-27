@@ -31,10 +31,10 @@ PRINTF_A	=	$(addprefix $(PRINTF), libftprintf.a)
 
 all		:	client server
 
-client	:	$(COBJ_DIR) $(COBJ)
+client	:	$(COBJ_DIR) $(COBJ) $(PRINTF_A)
 	$(CC) $(CFLAGS) $(COBJ) -L$(PRINTF) -lftprintf -o client_soft
 
-server	:	$(PRINTF_A) $(SOBJ_DIR) $(SOBJ)
+server	:	$(PRINTF_A) $(SOBJ_DIR) $(SOBJ) $(PRINTF_A)
 	$(CC) $(CFLAGS) $(SOBJ) -L$(PRINTF) -lftprintf -o server_soft
 
 $(PRINTF_A):
@@ -46,10 +46,10 @@ $(COBJ_DIR):
 $(SOBJ_DIR):
 	mkdir $(SOBJ_DIR)
 
-$(COBJ_DIR)%.o: $(CSRC_DIR)%.c
+$(COBJ_DIR)%.o: $(CSRC_DIR)%.c $(INCLUDE)/client.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
-$(SOBJ_DIR)%.o: $(SSRC_DIR)%.c
+$(SOBJ_DIR)%.o: $(SSRC_DIR)%.c $(INCLUDE)/server.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean	:
@@ -57,7 +57,7 @@ clean	:
 	$(MAKE) clean -s -C $(PRINTF)
 
 fclean	:	clean
-	$(RM) -f client server
+	$(RM) -f client_soft server_soft
 	$(MAKE) fclean -s -C $(PRINTF)
 
 re		:	fclean all

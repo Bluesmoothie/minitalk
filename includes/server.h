@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/26 19:12:44 by ygille           ###   ########.fr       */
+/*   Updated: 2024/11/27 17:31:54 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,6 @@
 # include <ft_printf.h>
 # include <signal.h>
 
-void	sig_handler(int sig, siginfo_t *info, void *ucontext);
+void	sig_handler(int sig);
 
 # endif

@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:41:03 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/26 18:52:07 by ygille           ###   ########.fr       */
+/*   Updated: 2024/11/27 18:44:08 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,5 +15,10 @@
 
 # include <ft_printf.h>
 # include <signal.h>
+
+# define DELAY 500
+
+void	send_sig(int pid, char *msg);
+void	end_of_transmission(int pid);
 
 #endif
