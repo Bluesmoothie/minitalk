@@ -1,4 +1,4 @@
-.PHONY	:	clean fclean re all client server
+.PHONY	:	clean fclean re all
 
 #			GCC
 
