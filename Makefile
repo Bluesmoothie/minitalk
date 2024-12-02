@@ -8,56 +8,51 @@ INCLUDE 	=	includes
 
 #			CLIENT
 
-CSRC_FILES	=	main
-CSRC_DIR	=	client/
-COBJ_DIR	=	cobj/
-CSRC 		= 	$(addprefix $(CSRC_DIR), $(addsuffix .c, $(CSRC_FILES)))
-COBJ 		= 	$(addprefix $(COBJ_DIR), $(addsuffix .o, $(CSRC_FILES)))
+CSRC_FILES	=	client
+CSRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(CSRC_FILES)))
+COBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(CSRC_FILES)))
 
 #			SERVER
 
-SSRC_FILES	=	main
-SSRC_DIR	=	server/
-SOBJ_DIR	=	sobj/
-SSRC 		= 	$(addprefix $(SSRC_DIR), $(addsuffix .c, $(SSRC_FILES)))
-SOBJ 		= 	$(addprefix $(SOBJ_DIR), $(addsuffix .o, $(SSRC_FILES)))
+SSRC_FILES	=	server
+SSRC 		= 	$(addprefix $(SRC_DIR), $(addsuffix .c, $(SSRC_FILES)))
+SOBJ 		= 	$(addprefix $(OBJ_DIR), $(addsuffix .o, $(SSRC_FILES)))
+
+#			COMMON
+
+SRC_DIR	=	src/
+OBJ_DIR	=	$(SRC_DIR)obj/
 
 #			LIBFTPRINTF
 
 PRINTF		=	ft_printf/
-PRINTF_A	=	$(addprefix $(PRINTF), libftprintf.a)
+PRINTF_A	=	$(PRINTF)libftprintf.a
 
 #			RULES
 
 all		:	client server
 
-client	:	$(COBJ_DIR) $(COBJ) $(PRINTF_A)
-	$(CC) $(CFLAGS) $(COBJ) -L$(PRINTF) -lftprintf -o client_soft
+client	:	$(OBJ_DIR) $(COBJ) $(PRINTF_A) $(INCLUDE)/client.h
+	$(CC) $(CFLAGS) $(COBJ) -L$(PRINTF) -lftprintf -o client
 
-server	:	$(PRINTF_A) $(SOBJ_DIR) $(SOBJ) $(PRINTF_A)
-	$(CC) $(CFLAGS) $(SOBJ) -L$(PRINTF) -lftprintf -o server_soft
+server	:	$(OBJ_DIR) $(SOBJ) $(PRINTF_A) $(INCLUDE)/server.h
+	$(CC) $(CFLAGS) $(SOBJ) -L$(PRINTF) -lftprintf -o server
 
 $(PRINTF_A):
-	$(MAKE) -s -C $(PRINTF)
+	$(MAKE) -C $(PRINTF)
 
-$(COBJ_DIR):
-	mkdir $(COBJ_DIR)
+$(OBJ_DIR):
+	mkdir $(OBJ_DIR)
 
-$(SOBJ_DIR):
-	mkdir $(SOBJ_DIR)
-
-$(COBJ_DIR)%.o: $(CSRC_DIR)%.c $(INCLUDE)/client.h
-	$(CC) $(CFLAGS) -c $< -o $@
-
-$(SOBJ_DIR)%.o: $(SSRC_DIR)%.c $(INCLUDE)/server.h
+$(OBJ_DIR)%.o: $(SRC_DIR)%.c
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean	:
-	$(RM) -rf $(COBJ_DIR) $(SOBJ_DIR)
+	$(RM) -rf $(OBJ_DIR)
 	$(MAKE) clean -s -C $(PRINTF)
 
 fclean	:	clean
-	$(RM) -f client_soft server_soft
+	$(RM) -f client server
 	$(MAKE) fclean -s -C $(PRINTF)
 
 re		:	fclean all
