@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:51 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 15:36:21 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/03 15:34:14 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@ int	main(void)
 
 	ft_printf("Server PID : %d\n", getpid());
 	act.sa_handler = sig_handler;
+	act.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &act, NULL);
 	sigaction(SIGUSR2, &act, NULL);
 	while (1)
@@ -25,12 +26,13 @@ int	main(void)
 	return (0);
 }
 
-void	sig_handler(int sig)
+void	*sig_handler(int sig, siginfo_t *info, void *context)
 {
 	static char	c = 0;
 	static int	i = 0;
 	static char	*msg = NULL;
 
+	(void)context;
 	if (sig == SIGUSR1)
 		c |= (1 << i);
 	else
@@ -38,7 +40,7 @@ void	sig_handler(int sig)
 	if (i == 7)
 	{
 		if (c == '\0')
-			print_message(&msg);
+			print_message(&msg, info->si_pid);
 		message_handler(c, &msg);
 		i = 0;
 		c = 0;
@@ -71,9 +73,9 @@ void	message_handler(char c, char **msg)
 	}
 }
 
-void	print_message(char **msg)
+void	print_message(char **msg, int pid)
 {
-	ft_printf("Message received :\n");
+	ft_printf("Message received from %i :\n", pid);
 	ft_printf("%s\n", *msg);
 	ft_printf("Transmission ended\n");
 	free(*msg);
