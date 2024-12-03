@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:51 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 15:46:21 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/03 16:02:47 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -80,4 +80,19 @@ void	print_message(char **msg, int pid)
 	ft_printf("Transmission ended\n");
 	free(*msg);
 	*msg = NULL;
+	usleep(DELAY);
+	send_ack(pid);
+}
+
+void	send_ack(int pid)
+{
+	int	i;
+
+	i = 0;
+	while (i < 8)
+	{
+		kill(pid, SIGUSR2);
+		i++;
+		usleep(DELAY);
+	}
 }
