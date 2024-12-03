@@ -1,23 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.c                                           :+:      :+:    :+:   */
+/*   server_bonus.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:51 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 15:34:14 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/03 15:46:21 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <server.h>
+#include <server_bonus.h>
 
 int	main(void)
 {
 	struct sigaction	act;
 
 	ft_printf("Server PID : %d\n", getpid());
-	act.sa_handler = sig_handler;
+	act.sa_sigaction = sig_handler;
 	act.sa_flags = SA_SIGINFO;
 	sigaction(SIGUSR1, &act, NULL);
 	sigaction(SIGUSR2, &act, NULL);
@@ -26,7 +26,7 @@ int	main(void)
 	return (0);
 }
 
-void	*sig_handler(int sig, siginfo_t *info, void *context)
+void	sig_handler(int sig, siginfo_t *info, void *context)
 {
 	static char	c = 0;
 	static int	i = 0;
