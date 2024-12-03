@@ -1,23 +1,39 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 13:09:45 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 13:45:52 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/27 13:24:57 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SERVER_H
-#  define SERVER_H
+#include <libft.h>
 
-# include <ft_printf.h>
-# include <libft.h>
-# include <signal.h>
+int	ft_atoi(const char *nptr)
+{
+	size_t	i;
+	int		num;
+	int		sign;
 
-void	sig_handler(int sig);
-void	message_handler(char c, char **msg);
-
-# endif
+	i = 0;
+	num = 0;
+	sign = 1;
+	while ((nptr[i] >= '\t' && nptr[i] <= '\r') || nptr[i] == ' ')
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		num *= 10;
+		num += nptr[i] - 48;
+		i++;
+	}
+	return (num * sign);
+}

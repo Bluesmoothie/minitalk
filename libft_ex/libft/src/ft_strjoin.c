@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   ft_strjoin.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 13:09:45 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 14:59:56 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/27 13:57:08 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SERVER_H
-#  define SERVER_H
+#include <libft.h>
 
-# include <ft_printf.h>
-# include <libft.h>
-# include <signal.h>
+char	*ft_strjoin(char const *s1, char const *s2)
+{
+	size_t	size;
+	char	*join;
 
-void	sig_handler(int sig);
-void	message_handler(char c, char **msg);
-
-# endif
+	size = ft_strlen(s1) + ft_strlen(s2) + 1;
+	join = malloc(sizeof(char) * size);
+	if (join == NULL)
+		return (NULL);
+	join[0] = '\0';
+	ft_strlcat(join, s1, ft_strlen(s1) + 1);
+	ft_strlcat(join, s2, size);
+	return (join);
+}

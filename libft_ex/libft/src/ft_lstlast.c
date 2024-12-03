@@ -1,23 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   ft_lstlast.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 13:09:45 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/14 12:02:13 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/27 13:25:38 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SERVER_H
-#  define SERVER_H
+#include <libft.h>
 
-# include <ft_printf.h>
-# include <libft.h>
-# include <signal.h>
-
-void	sig_handler(int sig);
-void	message_handler(char c, char **msg);
-
-# endif
+t_list	*ft_lstlast(t_list *lst)
+{
+	if (lst == NULL)
+		return (lst);
+	while (lst->next != NULL)
+		lst = lst->next;
+	return (lst);
+}

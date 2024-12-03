@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   ft_striteri.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 13:09:45 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 18:17:59 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/27 13:26:57 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SERVER_H
-#  define SERVER_H
+#include <libft.h>
 
-# include <ft_printf.h>
-# include <libft.h>
-# include <signal.h>
+void	ft_striteri(char *s, void (*f)(unsigned int, char*))
+{
+	size_t	i;
 
-void	sig_handler(int sig);
-void	message_handler(char c, char **msg);
-
-# endif
+	i = 0;
+	while (s[i])
+	{
+		f(i, &s[i]);
+		i++;
+	}
+	return ;
+}

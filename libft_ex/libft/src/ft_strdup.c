@@ -1,23 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 13:09:45 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 14:27:04 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/27 13:26:54 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SERVER_H
-#  define SERVER_H
+#include <libft.h>
 
-# include <ft_printf.h>
-# include <libft.h>
-# include <signal.h>
+char	*ft_strdup(const char *s)
+{
+	char	*dup;
+	size_t	size;
 
-void	sig_handler(int sig);
-void	message_handler(char c, char **msg);
-
-# endif
+	size = ft_strlen(s) + 1;
+	dup = malloc(sizeof(char) * size);
+	if (dup == NULL)
+		return (NULL);
+	ft_strlcpy(dup, s, size);
+	return (dup);
+}

@@ -3,7 +3,7 @@
 #			GCC
 
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -I $(INCLUDE) -I $(PRINTF)include
+CFLAGS		=	-Wall -Wextra -Werror -I $(INCLUDE) -I $(LIBFT)include
 INCLUDE 	=	includes
 
 #			CLIENT
@@ -23,36 +23,36 @@ SOBJ 		= 	$(addprefix $(OBJ_DIR)/, $(addsuffix .o, $(SSRC_FILES)))
 SRC_DIR		=	src
 OBJ_DIR		=	$(SRC_DIR)/obj
 
-#			LIBFTPRINTF
+#			LIBFT
 
-PRINTF		=	ft_printf/
-PRINTF_A	=	$(PRINTF)libftprintf.a
+LIBFT		=	libft_ex
+LIBFT_A		=	$(LIBFT)libft_ex.a
 
 #			RULES
 
 all				:	client server
 
-client			:	$(PRINTF_A) $(OBJ_DIR) $(COBJ) $(INCLUDE)/client.h
-				$(CC) $(CFLAGS) $(COBJ) -L$(PRINTF) -lftprintf -o client
+client			:	$(LIBFT_A) $(OBJ_DIR) $(COBJ)
+				$(CC) $(CFLAGS) $(COBJ) -L$(LIBFT) -lft_ex -o client
 
-server			:	$(PRINTF_A) $(OBJ_DIR) $(SOBJ) $(INCLUDE)/server.h
-				$(CC) $(CFLAGS) $(SOBJ) -L$(PRINTF) -lftprintf -o server
+server			:	$(LIBFT_A) $(OBJ_DIR) $(SOBJ)
+				$(CC) $(CFLAGS) $(SOBJ) -L$(LIBFT) -lft_ex -o server
 
-$(PRINTF_A)		:
-				$(MAKE) -C $(PRINTF)
+$(LIBFT_A)		:
+				$(MAKE) -C $(LIBFT)
 
 $(OBJ_DIR)		:
 				mkdir $(OBJ_DIR)
 
-$(OBJ_DIR)%.o	: 	$(SRC_DIR)%.c
+$(OBJ_DIR)%.o	: 	$(SRC_DIR)%.c $(INCLUDE)/client.h $(INCLUDE)/server.h
 				$(CC) $(CFLAGS) -c $< -o $@
 
 clean			:
 				$(RM) -rf $(OBJ_DIR)
-				$(MAKE) clean -s -C $(PRINTF)
+				$(MAKE) clean -s -C $(LIBFT)
 
 fclean			:	clean
 				$(RM) -f client server
-				$(MAKE) fclean -s -C $(PRINTF)
+				$(MAKE) fclean -s -C $(LIBFT)
 
 re				:	fclean all

@@ -1,23 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   ft_strlcpy.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 13:09:45 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/12 18:29:55 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/27 13:27:06 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SERVER_H
-#  define SERVER_H
+#include <libft.h>
 
-# include <ft_printf.h>
-# include <libft.h>
-# include <signal.h>
+size_t	ft_strlcpy(char *dst, const char *src, size_t size)
+{
+	size_t	count;
 
-void	sig_handler(int sig);
-void	message_handler(char c, char **msg);
-
-# endif
+	count = 0;
+	if (size == 0)
+		return (ft_strlen(src));
+	while (count < size - 1 && src[count] != '\0')
+	{
+		dst[count] = src[count];
+		count++;
+	}
+	dst[count] = '\0';
+	return (ft_strlen(src));
+}

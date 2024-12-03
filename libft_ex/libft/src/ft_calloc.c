@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   ft_calloc.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 13:09:45 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 14:00:08 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/27 13:27:45 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SERVER_H
-#  define SERVER_H
+#include <libft.h>
 
-# include <ft_printf.h>
-# include <libft.h>
-# include <signal.h>
+void	*ft_calloc(size_t nmemb, size_t size)
+{
+	void	*array;
+	long	overflow;
 
-void	sig_handler(int sig);
-void	message_handler(char c, char **msg);
-
-# endif
+	overflow = nmemb * size;
+	if (overflow > INT_MAX)
+		return (NULL);
+	array = malloc (overflow);
+	if (array == NULL)
+		return (NULL);
+	ft_bzero (array, overflow);
+	return (array);
+}

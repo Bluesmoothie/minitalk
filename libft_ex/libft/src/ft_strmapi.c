@@ -1,23 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 13:09:45 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 18:11:47 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/27 13:27:10 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SERVER_H
-#  define SERVER_H
+#include <libft.h>
 
-# include <ft_printf.h>
-# include <libft.h>
-# include <signal.h>
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
+{
+	size_t	size;
+	size_t	i;
+	char	*res;
 
-void	sig_handler(int sig);
-void	message_handler(char c, char **msg);
-
-# endif
+	size = ft_strlen(s);
+	res = malloc (sizeof(char) * size + 1);
+	if (res == NULL)
+		return (res);
+	i = 0;
+	while (i < size)
+	{
+		res[i] = f((unsigned int)i, s[i]);
+		i++;
+	}
+	res [i] = '\0';
+	return (res);
+}

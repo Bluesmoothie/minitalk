@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   server.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:51 by ygille            #+#    #+#             */
-/*   Updated: 2024/11/27 18:40:17 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/03 13:16:01 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,7 @@ void	sig_handler(int sig)
 {
 	static char	c = 0;
 	static int	i = 0;
+	static char	*msg = NULL;
 
 	if (sig == SIGUSR1)
 		c |= (1 << i);
@@ -38,10 +39,15 @@ void	sig_handler(int sig)
 	{
 		if (c == '\0')
 			ft_printf("\nTransmission ended\n");
-		ft_printf("%c", c);
+		message_handler(c, &msg);
 		i = 0;
 		c = 0;
 	}
 	else
 		i++;
+}
+
+void	message_handler(char c, char **msg)
+{
+	int	size
 }

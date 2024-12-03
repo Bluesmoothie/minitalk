@@ -1,23 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   ft_substr.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 13:09:45 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/13 14:38:28 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/27 13:27:28 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SERVER_H
-#  define SERVER_H
+#include <libft.h>
 
-# include <ft_printf.h>
-# include <libft.h>
-# include <signal.h>
+char	*ft_substr(char const *s, unsigned int start, size_t len)
+{
+	char	*sub;
+	size_t	size;
 
-void	sig_handler(int sig);
-void	message_handler(char c, char **msg);
-
-# endif
+	if (start > ft_strlen(s))
+		size = 1;
+	else
+		size = ft_strlen(&s[start]) + 1;
+	if (size > len)
+		size = len + 1;
+	sub = malloc (sizeof(char) * size);
+	if (sub == NULL)
+		return (NULL);
+	if (start > ft_strlen(s))
+		sub[0] = '\0';
+	else
+		ft_strlcpy(sub, &s[start], size);
+	return (sub);
+}

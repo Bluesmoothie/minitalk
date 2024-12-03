@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   ft_strrchr.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 13:09:45 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/12 19:47:16 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/27 13:27:20 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SERVER_H
-#  define SERVER_H
+#include <libft.h>
 
-# include <ft_printf.h>
-# include <libft.h>
-# include <signal.h>
+char	*ft_strrchr(const char *s, int c)
+{
+	size_t	count;
 
-void	sig_handler(int sig);
-void	message_handler(char c, char **msg);
-
-# endif
+	count = ft_strlen(s);
+	while (c > 127)
+		c -= 128;
+	while (count != 0 && s[count] != c)
+		count--;
+	if (s[count] == c)
+		return ((char *)&s[count]);
+	else
+		return (NULL);
+}

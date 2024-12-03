@@ -1,23 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   server.h                                           :+:      :+:    :+:   */
+/*   ft_memcpy.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 13:09:45 by ygille           ###   ########.fr       */
+/*   Created: 2024/11/12 15:37:39 by ygille            #+#    #+#             */
+/*   Updated: 2024/11/27 13:25:59 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-# ifndef SERVER_H
-#  define SERVER_H
+#include <libft.h>
 
-# include <ft_printf.h>
-# include <libft.h>
-# include <signal.h>
+void	*ft_memcpy(void *dest, const void *src, size_t n)
+{
+	size_t		count;
 
-void	sig_handler(int sig);
-void	message_handler(char c, char **msg);
-
-# endif
+	if (dest == NULL && src == NULL)
+		return (dest);
+	count = 0;
+	while (count < n)
+	{
+		((char *)dest)[count] = ((const char *)src)[count];
+		count++;
+	}
+	return (dest);
+}
