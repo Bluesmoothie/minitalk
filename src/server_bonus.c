@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:51 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 16:02:47 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/04 16:56:08 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ int	main(void)
 	ft_printf("Server PID : %d\n", getpid());
 	act.sa_sigaction = sig_handler;
 	act.sa_flags = SA_SIGINFO;
+	sigemptyset(&act.sa_mask);
 	sigaction(SIGUSR1, &act, NULL);
 	sigaction(SIGUSR2, &act, NULL);
 	while (1)
@@ -54,20 +55,25 @@ void	message_handler(char c, char **msg)
 	int		size;
 	char	*tmp;
 
+	size = ft_strlen(*msg) + 2;
 	if (!(*msg))
 	{
-		size = 2;
 		*msg = malloc(size);
+		if (!*msg)
+			exit(1);
 		(*msg)[0] = c;
 		(*msg)[1] = '\0';
 	}
 	else
 	{
-		size = ft_strlen(*msg) + 2;
 		tmp = ft_strdup(*msg);
 		free(*msg);
+		*msg = NULL;
 		*msg = malloc(size);
+		if (!*msg)
+			exit(1);
 		ft_strlcpy(*msg, tmp, size);
+		free(tmp);
 		(*msg)[size - 2] = c;
 		(*msg)[size - 1] = '\0';
 	}
