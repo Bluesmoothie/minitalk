@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/04 16:59:24 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/04 18:58:53 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ int	main(int argc, char *argv[])
 	sigemptyset(&act.sa_mask);
 	sigaction(SIGUSR1, &act, NULL);
 	sigaction(SIGUSR2, &act, NULL);
-	ft_printf("Sending : %s to %s\n", argv[1], argv[2]);
+	ft_printf("Sending : %s to %s\n", argv[2], argv[1]);
 	send_sig(ft_atoi(argv[1]), argv[2]);
 	ft_printf("Message sent\n");
 	while (g_ack)

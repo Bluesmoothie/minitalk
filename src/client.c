@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/04 14:18:52 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/04 18:58:46 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	main(int argc, char *argv[])
 		ft_printf("Usage: %s <SERVER_PID> <MESSAGE>\n", argv[0]);
 		return (1);
 	}
-	ft_printf("Sending : %s to %s\n", argv[1], argv[2]);
+	ft_printf("Sending : %s to %s\n", argv[2], argv[1]);
 	send_sig(ft_atoi(argv[1]), argv[2]);
 	ft_printf("Message sent\n");
 	return (0);
