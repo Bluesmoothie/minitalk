@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/03 17:41:32 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/04 14:19:11 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ int	main(int argc, char *argv[])
 
 	if (argc != 3)
 	{
-		ft_printf("Usage: %s <MESSAGE> <SERVER_PID>\n", argv[0]);
+		ft_printf("Usage: %s <SERVER_PID> <MESSAGE>\n", argv[0]);
 		return (1);
 	}
 	g_ack = 1;
@@ -27,7 +27,7 @@ int	main(int argc, char *argv[])
 	sigaction(SIGUSR1, &act, NULL);
 	sigaction(SIGUSR2, &act, NULL);
 	ft_printf("Sending : %s to %s\n", argv[1], argv[2]);
-	send_sig(ft_atoi(argv[2]), argv[1]);
+	send_sig(ft_atoi(argv[1]), argv[2]);
 	ft_printf("Message sent\n");
 	while (g_ack)
 		pause();
