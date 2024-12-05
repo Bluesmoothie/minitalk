@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:51 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/05 16:06:53 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/05 16:25:07 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -54,7 +54,7 @@ void	sig_handler(int sig, siginfo_t *info, void *context)
 void	message_handler(char c, char **msg)
 {
 	char	*tmp;
-	int 	i;
+	int		i;
 
 	if (!*msg)
 	{

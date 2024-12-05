@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/05 16:11:52 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/05 16:25:17 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,7 @@ void	send_sig(int pid, char *msg)
 			else
 				kill(pid, SIGUSR2);
 			j++;
-			while(g_ack)
+			while (g_ack)
 				pause();
 			g_ack = 1;
 		}
@@ -70,7 +70,7 @@ void	end_of_transmission(int pid)
 	{
 		kill(pid, SIGUSR2);
 		i++;
-		while(g_ack)
+		while (g_ack)
 			pause();
 		g_ack = 1;
 	}
