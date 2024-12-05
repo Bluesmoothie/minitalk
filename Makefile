@@ -1,4 +1,4 @@
-.PHONY	:	clean fclean re all client_bonus server_bonus
+.PHONY	:	clean fclean re all
 
 #			GCC
 
@@ -54,10 +54,10 @@ server			:	$(LIBFT_A) $(SOBJ_DIR) $(SOBJ)
 				$(CC) $(CFLAGS) $(SOBJ) -L$(LIBFT) -lft_ex -o server
 
 client_bonus	:	$(LIBFT_A) $(COBJ_DIR) $(CBOBJ)
-				$(CC) $(CFLAGS) $(CBOBJ) -L$(LIBFT) -lft_ex -o client
+				$(CC) $(CFLAGS) $(CBOBJ) -L$(LIBFT) -lft_ex -o client_bonus
 
 server_bonus	:	$(LIBFT_A) $(SOBJ_DIR) $(SBOBJ)
-				$(CC) $(CFLAGS) $(SBOBJ) -L$(LIBFT) -lft_ex -o server
+				$(CC) $(CFLAGS) $(SBOBJ) -L$(LIBFT) -lft_ex -o server_bonus
 
 $(LIBFT_A)		:
 				$(MAKE) -C $(LIBFT)

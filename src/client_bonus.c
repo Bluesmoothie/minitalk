@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:57 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/04 18:58:53 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/05 16:11:52 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,7 +51,9 @@ void	send_sig(int pid, char *msg)
 			else
 				kill(pid, SIGUSR2);
 			j++;
-			usleep(DELAY);
+			while(g_ack)
+				pause();
+			g_ack = 1;
 		}
 		i++;
 	}
@@ -68,29 +70,19 @@ void	end_of_transmission(int pid)
 	{
 		kill(pid, SIGUSR2);
 		i++;
-		usleep(DELAY);
+		while(g_ack)
+			pause();
+		g_ack = 1;
 	}
 }
 
 void	sig_handler(int sig, siginfo_t *info, void *context)
 {
-	static char	c = 0;
-	static int	i = 0;
-
 	(void)context;
 	if (sig == SIGUSR1)
-		c |= (1 << i);
-	else
-		c &= ~(1 << i);
-	if (i == 7)
-	{
-		if (c == '\0')
-			print_ack(info->si_pid);
-		i = 0;
-		c = 0;
-	}
-	else
-		i++;
+		g_ack = 0;
+	else if (sig == SIGUSR2)
+		print_ack(info->si_pid);
 }
 
 void	print_ack(int pid)

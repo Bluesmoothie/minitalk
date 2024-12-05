@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 17:33:51 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/04 16:56:08 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/05 16:17:06 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,57 +48,42 @@ void	sig_handler(int sig, siginfo_t *info, void *context)
 	}
 	else
 		i++;
+	kill(info->si_pid, SIGUSR1);
 }
 
 void	message_handler(char c, char **msg)
 {
-	int		size;
 	char	*tmp;
+	int 	i;
 
-	size = ft_strlen(*msg) + 2;
-	if (!(*msg))
+	if (!*msg)
 	{
-		*msg = malloc(size);
+		*msg = malloc(BUFF + 1);
 		if (!*msg)
 			exit(1);
-		(*msg)[0] = c;
-		(*msg)[1] = '\0';
+		(*msg)[0] = '\0';
 	}
-	else
+	i = ft_strlen(*msg);
+	if ((i / BUFF) * BUFF == i)
 	{
-		tmp = ft_strdup(*msg);
-		free(*msg);
-		*msg = NULL;
-		*msg = malloc(size);
+		tmp = *msg;
+		*msg = malloc(i + BUFF + 1);
 		if (!*msg)
 			exit(1);
-		ft_strlcpy(*msg, tmp, size);
+		ft_strlcpy(*msg, tmp, i + 1);
 		free(tmp);
-		(*msg)[size - 2] = c;
-		(*msg)[size - 1] = '\0';
 	}
+	(*msg)[i] = c;
+	(*msg)[i + 1] = '\0';
 }
 
 void	print_message(char **msg, int pid)
 {
+	kill(pid, SIGUSR1);
 	ft_printf("Message received from %i :\n", pid);
 	ft_printf("%s\n", *msg);
 	ft_printf("Transmission ended\n");
 	free(*msg);
 	*msg = NULL;
-	usleep(DELAY);
-	send_ack(pid);
-}
-
-void	send_ack(int pid)
-{
-	int	i;
-
-	i = 0;
-	while (i < 8)
-	{
-		kill(pid, SIGUSR2);
-		i++;
-		usleep(DELAY);
-	}
+	kill(pid, SIGUSR2);
 }

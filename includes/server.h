@@ -6,7 +6,7 @@
 /*   By: ygille <ygille@student.42lyon.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/26 18:01:18 by ygille            #+#    #+#             */
-/*   Updated: 2024/12/04 16:57:05 by ygille           ###   ########.fr       */
+/*   Updated: 2024/12/05 16:09:55 by ygille           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,8 +17,10 @@
 # include <libft.h>
 # include <signal.h>
 
-void	sig_handler(int sig);
+# define BUFF 1024
+
+void	sig_handler(int sig, siginfo_t *info, void *context);
 void	message_handler(char c, char **msg);
-void	print_message(char **msg);
+void	print_message(char **msg, int pid);
 
 #endif
