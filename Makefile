@@ -79,7 +79,7 @@ clean			:
 				$(MAKE) clean -s -C $(LIBFT)
 
 fclean			:	clean
-				$(RM) -f client server
+				$(RM) -f client server client_bonus server_bonus
 				$(MAKE) fclean -s -C $(LIBFT)
 
 re				:	fclean all
