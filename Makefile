@@ -38,7 +38,7 @@ SOBJ_DIR		=	$(SRC_DIR)/sobj
 
 #			LIBFT
 
-LIBFT		=	libft_ex
+LIBFT		=	libft
 LIBFT_A		=	$(LIBFT)/libft_ex.a
 
 #			RULES
