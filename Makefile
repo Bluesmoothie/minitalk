@@ -1,4 +1,4 @@
-.PHONY	:	clean fclean re all
+.PHONY	:	clean fclean re all FORCE
 
 #			GCC
 
@@ -59,8 +59,10 @@ client_bonus	:	$(LIBFT_A) $(COBJ_DIR) $(CBOBJ)
 server_bonus	:	$(LIBFT_A) $(SOBJ_DIR) $(SBOBJ)
 				$(CC) $(CFLAGS) $(SBOBJ) -L$(LIBFT) -lft_ex -o server_bonus
 
-$(LIBFT_A)		:
+$(LIBFT_A)		: FORCE
 				$(MAKE) -C $(LIBFT)
+
+FORCE			:
 
 $(COBJ_DIR)		:
 				mkdir $(COBJ_DIR)
