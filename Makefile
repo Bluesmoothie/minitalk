@@ -3,7 +3,7 @@
 #			GCC
 
 CC			=	gcc
-CFLAGS		=	-Wall -Wextra -Werror -I $(INCLUDE) -I $(LIBFT)include
+CFLAGS		=	-Wall -Wextra -Werror -I $(INCLUDE) -I $(LIBFT)include -no-pie
 INCLUDE 	=	includes
 
 #			CLIENT
