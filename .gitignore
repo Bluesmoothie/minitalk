@@ -1,0 +1,6 @@
+*.o
+client
+server
+*.a
+client_bonus
+server_bonus
